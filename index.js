@@ -8,6 +8,8 @@ const slackWebhookSecret = process.env.SLACK_WEBHOOK_SECRET
 
 const slack = new Slack()
 slack.setWebhook(`https://hooks.slack.com/services/${slackWebhookSecret}`)
+
+// Promisify the slack webhook method
 const slackWebhook = util.promisify(slack.webhook)
 
 const URLs = [
@@ -50,7 +52,7 @@ const getDateTimeString = () => {
 }
 
 const main = async () => {
-  postToSlack(`============================== (${getDateTimeString()})`)
+  postToSlack(`============================== (${getDateTimeString()}) UTC`)
   for (let i = 0; i < URLs.length; i++) {
     const { name, url } = URLs[i]
     try {
