@@ -52,21 +52,22 @@ const getDateTimeString = () => {
 }
 
 const main = async () => {
-  postToSlack(`============================== (${getDateTimeString()}) UTC`)
+  const message = []
+  message.push(`============================== (${getDateTimeString()}) UTC`)
   for (let i = 0; i < URLs.length; i++) {
     const { name, url } = URLs[i]
     try {
       await ping(url)
 
-      await postToSlack(`[*${name}*] ✅`)
+      message.push(`[*${name}*] ✅`)
     } catch (err) {
       console.error(err)
-      await postToSlack(
-        `[*${name}*] UNREACHABLE!!! 🚨🚨🚨 \n Error: ${err.message}`
-      )
+      message.push(`[*${name}*] UNREACHABLE!!! 🚨🚨🚨 \n Error: ${err.message}`)
     }
   }
-  postToSlack(`==============================`)
+  message.push('==============================')
+
+  await postToSlack(message.join('\n'))
 }
 
 main()
