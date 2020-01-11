@@ -14,12 +14,12 @@ const slackWebhook = util.promisify(slack.webhook)
 
 const URLs = [
   {
-    name: 'Bookis Landing page',
-    url: 'https://bookis.io'
-  },
-  {
     name: 'Bookis app',
     url: 'https://app.bookis.io'
+  },
+  {
+    name: 'Bookis Landing page',
+    url: 'https://bookis.io'
   }
 ]
 
